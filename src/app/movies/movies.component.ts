@@ -30,6 +30,6 @@ export class MoviesComponent {
 
         this.movieServices.getMovies().subscribe(movies => {
             this.movies = movies;
-        })
+        });
     }
 }

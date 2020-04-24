@@ -1,3 +1,4 @@
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Movie } from '../movie';
 import { Movies } from '../movies/movies.datasource';
@@ -10,10 +11,17 @@ import { LoggingService } from './logging.service';
 })
 export class MovieService {
 
-  constructor(private loggingService: LoggingService) { }
+  private apiMoviesUrl = 'api/movies';
+
+  constructor(private loggingService: LoggingService, private http: HttpClient) { }
 
   getMovies(): Observable<Movie[]> {
     this.loggingService.add('MovieService: listing movies');
-    return of(Movies);
+    return this.http.get<Movie[]>(this.apiMoviesUrl);
+  }
+
+  getMovie(id): Observable<Movie> {
+    this.loggingService.add('MovieService: get detail by id' + id);
+    return this.http.get<Movie>(this.apiMoviesUrl + '/' + id);
   }
 }
