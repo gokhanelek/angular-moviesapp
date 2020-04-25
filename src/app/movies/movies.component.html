@@ -5,7 +5,33 @@
   <ul class="list-group list-group-flush">
     <li *ngFor="let movie of movies" class="list-group-item" routerLink="/detail/{{ movie.id }}">
       <span class="badge badge-primary">{{movie.id}}</span>{{movie.name}}
-      <span class="close">x</span>
+      <span class="close" (click)="delete(movie)">x</span>
     </li>
   </ul>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Add Movie
+  </div>
+  <div class="card-body">
+    <div class="from-group">
+      <label for="name"></label>
+      <input #name class="form-control">
+    </div>
+
+    <div class="from-group">
+      <label for="imageUrl"></label>
+      <input #imgUrl class="form-control">
+    </div>
+
+    <div class="from-group">
+      <label for="description"></label>
+      <textarea #description class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-primary btn-sm"
+      (click)="add(name.value,imgUrl.value,description.value); name.value='';imgUrl.value='';description.value='';">Ekle</button>
+
+  </div>
 </div>
